@@ -1,0 +1,348 @@
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Precious Riya ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#ffd9e8,#ffeef6,#fff8fb);
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.card{
+width:92%;
+max-width:420px;
+background:rgba(255,255,255,.35);
+backdrop-filter:blur(20px);
+padding:35px;
+border-radius:30px;
+text-align:center;
+box-shadow:0 20px 40px rgba(255,105,180,.25);
+position:relative;
+z-index:5;
+animation:fade .8s;
+}
+
+h1{
+color:#ff4f8b;
+margin-bottom:20px;
+font-size:30px;
+}
+
+p{
+font-size:19px;
+line-height:1.8;
+color:#555;
+}
+
+button{
+padding:14px 28px;
+border:none;
+border-radius:50px;
+background:#ff5f97;
+color:white;
+font-size:18px;
+cursor:pointer;
+margin-top:25px;
+transition:.3s;
+box-shadow:0 8px 20px rgba(255,105,180,.35);
+}
+
+button:hover{
+transform:scale(1.08);
+}
+
+.heart{
+font-size:90px;
+cursor:pointer;
+animation:beat 1.2s infinite;
+}
+
+.page{
+display:none;
+}
+
+.show{
+display:block;
+}
+
+@keyframes beat{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.15);}
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.floating{
+position:absolute;
+font-size:24px;
+animation:float 10s linear infinite;
+opacity:.6;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(120vh) rotate(0deg);
+opacity:0;
+}
+
+20%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-120vh) rotate(360deg);
+opacity:0;
+}
+
+}
+
+#no{
+position:absolute;
+}
+
+.final{
+font-size:28px;
+font-weight:bold;
+color:#ff4f8b;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="hearts"></div>
+
+<div class="card">
+
+<div id="p1" class="page show">
+
+<div class="heart">❤️</div>
+
+<h1>For My Precious Riya</h1>
+
+<p>
+Tap the button below...
+</p>
+
+<button onclick="next()">
+Open My Heart 💗
+</button>
+
+</div>
+
+<div id="p2" class="page">
+
+<h1>🥺</h1>
+
+<p id="text"></p>
+
+<button onclick="next()">
+Next ❤️
+</button>
+
+</div>
+
+<div id="p3" class="page">
+
+<h1>💖</h1>
+
+<p class="final">
+
+Will you forgive me?
+
+</p>
+
+<br>
+
+<button onclick="yes()">
+Yes ❤️
+</button>
+
+<button id="no"
+onmouseover="moveNo()">
+Not Yet 🥺
+</button>
+
+</div>
+
+<div id="p4" class="page">
+
+<h1>❤️</h1>
+
+<p>
+
+Thank you...
+
+My love.
+
+<br><br>
+
+I promise I'll become better every single day.
+
+<br><br>
+
+Forever Yours,
+
+<b>Raj ❤️</b>
+
+</p>
+
+</div>
+
+</div>
+<script>
+
+const msgs=[
+"I messed up... and I'm really sorry for that.🥺🥺",
+"I promise I'll be better for you.😘😘",
+"Please forgive me... You mean so much to me.☹️☹️",
+"I'm really sorry, my love. I accidentally upset the most precious and adorable person in my life — you. 🥹",
+"Please forgive me if I hurt you or even if I was a little rude. I promise I didn't mean to. 🥺💕"
+];
+
+let page=1;
+let msgIndex=0;
+
+function next(){
+
+if(page==1){
+
+document.getElementById("p1").classList.remove("show");
+document.getElementById("p2").classList.add("show");
+
+type();
+
+page=2;
+
+return;
+
+}
+
+msgIndex++;
+
+if(msgIndex<msgs.length){
+
+type();
+
+}else{
+
+document.getElementById("p2").classList.remove("show");
+document.getElementById("p3").classList.add("show");
+
+}
+
+}
+
+function type(){
+
+const el=document.getElementById("text");
+
+el.innerHTML="";
+
+let i=0;
+
+const timer=setInterval(()=>{
+
+el.innerHTML+=msgs[msgIndex].charAt(i);
+
+i++;
+
+if(i>=msgs[msgIndex].length){
+
+clearInterval(timer);
+
+}
+
+},40);
+
+}
+
+function moveNo(){
+
+const b=document.getElementById("no");
+
+const x=Math.random()*220;
+
+const y=Math.random()*220;
+
+b.style.left=x+"px";
+b.style.top=y+"px";
+
+}
+
+function yes(){
+
+document.getElementById("p3").classList.remove("show");
+
+document.getElementById("p4").classList.add("show");
+
+confetti();
+
+}
+
+function heart(){
+
+const h=document.createElement("div");
+
+h.className="floating";
+
+h.innerHTML=Math.random()>.5?"💗":"❤️";
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.fontSize=(18+Math.random()*28)+"px";
+
+h.style.animationDuration=(6+Math.random()*5)+"s";
+
+document.body.appendChild(h);
+
+setTimeout(()=>h.remove(),11000);
+
+}
+
+setInterval(heart,450);
+
+function confetti(){
+
+for(let i=0;i<120;i++){
+
+setTimeout(heart,i*30);
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
